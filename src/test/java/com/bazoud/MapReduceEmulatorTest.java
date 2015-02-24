@@ -13,7 +13,7 @@ public class MapReduceEmulatorTest {
     @Test
     public void test_map_reduce() {
         MapReduceEmulator emulator = new MapReduceEmulator(getDirectory(), Pattern.compile("^z.*$"));
-        assertThat(emulator.start(), is(5));
+        assertThat(emulator.start(), is(5L));
     }
 
     private File getDirectory() {

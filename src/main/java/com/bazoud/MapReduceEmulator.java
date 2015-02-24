@@ -25,15 +25,14 @@ public class MapReduceEmulator {
     public long start() {
         return Arrays.stream(directory.listFiles((f, n) -> true)).parallel().map(file -> {
                     try {
-                        long sum = Files.lines(file.toPath()).parallel()
+                        return Files.lines(file.toPath()).parallel()
                                 .filter(s -> pattern.matcher(s).matches())
-                                .mapToLong(s -> 1)
+                                .mapToLong(s -> 1L)
                                 .sum();
-                        return sum;
                     } catch (Exception e) {
                         return 0;
                     }
                 }
-        ).collect(Collectors.counting()).intValue();
+        ).collect(Collectors.summingLong(p -> p.longValue()));
     }
 }
